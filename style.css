@@ -1,0 +1,22 @@
+:root {
+    --bg-color: #f0eff4;
+    --font-color: #211e20;
+    font-size: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: Arial, serif, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
