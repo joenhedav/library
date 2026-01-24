@@ -11,7 +11,39 @@
 
 <body>
 
+    <h1 class="header">Library</h1>
+
     <div class="library"></div>
+
+    <dialog class="addBook">
+        <form action="#" method="dialog">
+            <h3>Add a new book</h3>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required placeholder="The Hobbit">
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required placeholder="J.J.R. Tolkien">
+
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages" name="pages" required placeholder="295">
+
+            <label for="cover">Cover:</label>
+            <input type="text" id="cover" name="cover" required placeholder="URL image">
+
+            <label for="read">Read:</label>
+            <input type="checkbox" id="read" name="read" checked>
+
+            <div class="dialogBtns">
+                <button class="addBtn" type="submit">Add</button>
+                <button class="close">Close</button>
+            </div>
+
+        </form>
+
+    </dialog>
+
+    <button class="open">+</button>
 
     <script src="script.js"></script>
 </body>

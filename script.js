@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, read, cover) {
     this.id = crypto.randomUUID();
@@ -18,10 +18,13 @@ function renderLibrary() {
 
     const library = document.querySelector(".library");
 
+    library.innerHTML = "";
+
     myLibrary.forEach(book => {
 
         const newBook = document.createElement("div");
         newBook.classList.add("book");
+        newBook.dataset.id = book.id;
 
         const title = document.createElement("h1");
         const author = document.createElement("p");
@@ -43,15 +46,59 @@ function renderLibrary() {
         read.textContent = book.read;
         cover.src = book.cover;
 
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete");
+
         text.append(title, author, pages, read);
         overlay.appendChild(text);
 
-        newBook.append(cover, overlay);
+        newBook.append(cover, overlay, deleteBtn);
         library.appendChild(newBook);
+
+
+        deleteBtn.addEventListener("click", () => {
+            myLibrary = myLibrary.filter(newBook => newBook.id !== book.id);
+            renderLibrary();
+        });
+
     });
 }
 
+const addBook = document.querySelector(".addBook");
+const openDialog = document.querySelector(".open");
+const addBtn = document.querySelector(".addBtn");
+const closeDialog = document.querySelector(".close");
+const form = document.querySelector("form");
 
-addBookToLibrary("The Hobbit", "J.J.R. Tolkien", 295, "not read yet", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX7-5anWQ1AR7tmRrj6RcLLgodcAuaV3QSEA&s");
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const pagesInput = document.querySelector("#pages");
+const coverInput = document.querySelector("#cover");
+const readInput = document.querySelector("#read");
 
-renderLibrary();
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const title = titleInput.value;
+    const author = authorInput.value;
+    const pages = pagesInput.value;
+    const cover = coverInput.value;
+    const read = readInput.checked ? "read" : "not read yet";
+
+    addBookToLibrary(title, author, pages, read, cover);
+    renderLibrary();
+
+    form.reset();
+
+    addBook.close();
+});
+
+
+openDialog.addEventListener("click", () => {
+    addBook.showModal();
+});
+
+
+closeDialog.addEventListener("click", () => {
+    addBook.close();
+});
